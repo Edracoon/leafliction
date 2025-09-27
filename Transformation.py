@@ -18,7 +18,8 @@ def process_directory(source: str, dest: str, transfos: list[str]):
     Processes all images in a directory and saves transformations.
     """
     # Exclude histogram from transformations when processing a directory
-    transfos.remove('histogram')
+    if 'histogram' in transfos:
+        transfos.remove('histogram')
 
     # Process images
     os.makedirs(dest, exist_ok=True)
