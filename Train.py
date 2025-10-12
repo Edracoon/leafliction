@@ -13,7 +13,7 @@ from keras import models, layers, utils
 @dataclass
 class Config:
     data_dir: str = "./images" # Path to the dataset
-    out_dir: str = "./" # Path to the output directory
+    out_dir: str = "./model" # Path to the output directory
     batch_size: int = 32 # Number of images to process in each batch
     img_shape: Tuple[int, int, int] = (128, 128, 3) # Height, width, and rgb channels
     epochs: int = 10 # Number of times to iterate over the entire dataset

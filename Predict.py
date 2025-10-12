@@ -27,6 +27,9 @@ from keras.models import load_model, Sequential
 from keras.preprocessing import image
 
 
+MODEL_PATH = 'model/model.keras'
+LABELS_PATH = 'model/labels.json'
+
 def preprocess_image(image_path: str) -> np.ndarray:
     img = image.load_img(image_path, target_size=(128, 128))
     # Convert the image to a numpy array
@@ -68,10 +71,10 @@ def main() -> None:
 
     img = preprocess_image(args.image)
 
-    with open("./labels.json", "r", encoding="utf-8") as f:
+    with open(LABELS_PATH, "r", encoding="utf-8") as f:
         class_indices = json.load(f)
 
-    model: Sequential = load_model("./model.keras")
+    model: Sequential = load_model(MODEL_PATH)
     label, conf = predict_label(model, class_indices, img)
 
     print(f"Prediction: {label}  (confidence: {conf:.2%})")
