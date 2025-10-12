@@ -94,7 +94,7 @@ def print_summary(distribution: dict, plant: str):
     print(f"Total number of images: {total_images}")
     print(f"Number of categories: {len(distribution)}")
     print("\nDistribution by category:")
-    print("-" * 40)
+    print("-" * 50)
 
     # Sort by number of images descending
     sorted_dist = sorted(distribution.items(), key=lambda x: x[1],
@@ -104,14 +104,14 @@ def print_summary(distribution: dict, plant: str):
         percentage = (count / total_images) * 100
         print(f"{category:<25} | {count:>6} images | {percentage:>5.1f}%")
 
-    print("-" * 40)
+    print("-" * 50)
     print(f"{'Total':<25} | {total_images:>6} images | 100.0%")
 
 
 def main():
     if len(sys.argv) != 2:
         print("Usage: python Distribution.py <path_to_directory>")
-        print("Example: python Distribution.py ./images/Apple")
+        print("Example: python Distribution.py ./images")
         sys.exit(1)
 
     directory_path = sys.argv[1]
@@ -123,8 +123,6 @@ def main():
 
     # Get plant type name (main directory name)
     plant = os.path.basename(os.path.abspath(directory_path))
-
-    print(f"Analyzing image distribution for: {plant}")
     print(f"Directory analyzed: {os.path.abspath(directory_path)}")
 
     # Analyze distribution

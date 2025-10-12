@@ -69,7 +69,7 @@ def main():
     """
     if len(sys.argv) != 2:
         print("Usage: python3 BatchAugmentation.py <directory_path>")
-        print("Example: python3 BatchAugmentation.py ./images/Apple")
+        print("Example: python3 BatchAugmentation.py ./images")
         sys.exit(1)
 
     directory_path = sys.argv[1]
