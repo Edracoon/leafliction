@@ -1,13 +1,9 @@
-import os
-
-
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 from keras import utils
 from keras.models import load_model, Sequential
 
 
 MODEL_PATH = 'model/model.keras'
-TEST_DATASET_PATH = './test/'
+TEST_DATASET_PATH = './augmented_directory/test/'
 
 
 def evaluate():
@@ -17,14 +13,14 @@ def evaluate():
     """
     model: Sequential = load_model(MODEL_PATH)
 
-    test_generator = utils.image_dataset_from_directory(
+    tests = utils.image_dataset_from_directory(
         TEST_DATASET_PATH,
         image_size=(128, 128),
         batch_size=32,
         label_mode='categorical',
         shuffle=False
     )
-    loss, accuracy = model.evaluate(test_generator, verbose=1)
+    loss, accuracy = model.evaluate(tests, verbose=1)
     print(f"Accuracy : {accuracy}  |  Loss : {loss}")
 
 

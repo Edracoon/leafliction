@@ -11,7 +11,7 @@ from pathlib import Path
 import numpy as np
 
 
-def compute_distribution(directory_path: str) -> dict[str, int]:
+def compute_distribution(directory_path: str):
     """
     Analyzes the distribution of images in a directory and its subdirectories.
     """

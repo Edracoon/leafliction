@@ -2,4 +2,7 @@ venv/
 .venv/
 .cursorrules
 images/
+augmented_directory/
+db/
+model/
 __pycache__/

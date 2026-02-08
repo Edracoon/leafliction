@@ -13,7 +13,7 @@ from b_data_augmentation.Augmentation import augment_image
 from a_data_analysis.Distribution import compute_distribution
 
 
-def get_image_files(directory_path: str) -> list[str]:
+def get_image_files(directory_path: str):
     """
     Gets the first N image files from the specified directory.
     """
@@ -48,13 +48,13 @@ def augment_balance_directory(directory_path: str):
 
     total = 0
     for key in distribution:
-        augment_number = int((biggest_dir_count - distribution[key]) / 7)
+        augment_number = int((biggest_dir_count - distribution[key]) / 6)
         images = os.listdir(os.path.join(sys.argv[1], key))
         print(f"\n\n-- Augmenting {key} with {augment_number} images --")
         for i in range(augment_number):
             print(f'\r> {i+1}/{augment_number} images', end='')
             cur_img = random.choice(images)
-            augment_image(os.path.join(sys.argv[1], key, cur_img), display=False)
+            augment_image(os.path.join(sys.argv[1], key, cur_img), False)
             images.remove(cur_img)
             total += 1
 
