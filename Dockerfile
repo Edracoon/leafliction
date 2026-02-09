@@ -11,13 +11,10 @@ RUN apt-get update && apt-get install -y \
 
 COPY . /app
 
-RUN python -m venv .venv \
-    && . .venv/bin/activate \
-    && python -m pip install --upgrade pip \
+RUN python -m pip install --upgrade pip \
     && pip install -r requirements.txt \
     && pip install "rembg[cpu]"
 
-ENV PATH="/app/.venv/bin:$PATH"
 # Silence onnxruntime
 ENV ORT_LOG_SEVERITY_LEVEL=3
 

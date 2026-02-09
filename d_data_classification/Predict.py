@@ -64,12 +64,12 @@ def display_results(original_img, used_img: np.ndarray, prediction: str):
     _, axes = plt.subplots(1, 2, figsize=(15, 5 * 2))
 
     axes[0].imshow(original_img, interpolation='nearest')
-    axes[0].set_title("Original 128x128", fontsize=10, fontweight='bold')
+    axes[0].set_title('Original 128x128', fontsize=10, fontweight='bold')
     axes[0].axis('off')
 
     used_show = np.clip(used_img, 0, 255).astype(np.uint8)
     axes[1].imshow(used_show, interpolation='nearest')
-    axes[1].title(set_title="Used 128x128", fontsize=10, fontweight='bold')
+    axes[1].set_title('Used 128x128', fontsize=10, fontweight='bold')
     axes[1].axis('off')
 
     # Full screen and show
