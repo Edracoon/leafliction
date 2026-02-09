@@ -74,14 +74,13 @@ pyparsing==3.3.2
 python-dateutil==2.9.0.post0
 PyYAML==6.0.3
 referencing==0.37.0
-rembg==2.0.72
 requests==2.32.5
 resource-backed-dask-array==0.1.0
 rich==14.3.2
 rpds-py==0.30.0
 scikit-image==0.26.0
 scikit-learn==1.8.0
-scipy==1.17.0
+scipy<1.16
 setuptools==81.0.0
 six==1.17.0
 sortedcontainers==2.4.0

@@ -81,6 +81,8 @@ def plot_distribution(distribution: dict, plant: str):
     # Tight layout and show
     plt.tight_layout()
     plt.show()
+    plt.savefig("outputs/distribution.png", dpi=150, bbox_inches="tight")
+    plt.close()
 
 
 def print_summary(distribution: dict, plant: str):

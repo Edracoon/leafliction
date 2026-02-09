@@ -163,6 +163,8 @@ def display_augmentation(imgs: list[tuple[str, np.ndarray]]):
     plt.get_current_fig_manager().full_screen_toggle()
     plt.tight_layout()
     plt.show()
+    plt.savefig("outputs/augmentation.png", dpi=150, bbox_inches="tight")
+    plt.close()
 
 
 def save_augmented_image(image: np.ndarray, output_path: str):

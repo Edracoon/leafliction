@@ -1,0 +1,8 @@
+services:
+  devbox:
+    build: .
+    container_name: leafliction
+    volumes:
+      - .:/app
+    working_dir: /app
+    tty: true

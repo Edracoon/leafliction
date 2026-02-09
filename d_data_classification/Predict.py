@@ -77,6 +77,8 @@ def display_results(original_img, used_img: np.ndarray, prediction: str):
     plt.get_current_fig_manager().full_screen_toggle()
     plt.tight_layout()
     plt.show()
+    plt.savefig("outputs/predict.png", dpi=150, bbox_inches="tight")
+    plt.close()
 
 
 def parse_args(argv: list[str]):

@@ -24,12 +24,12 @@ def process_directory(source: str, dest: str, transfos: list[str]):
     # Process images
     os.makedirs(dest, exist_ok=True)
     for ipath in fnmatch.filter(os.listdir(source), '*.JPG'):
-        print(f"⏳ Processing image: {ipath}...", end='', flush=True)
+        print(f"...Processing image: {ipath}...", end='', flush=True)
         processor = ImageProcessor(os.path.join(source, ipath), transfos)
         for tr in transfos:
             path = os.path.join(dest, ipath.replace(".JPG", "_") + tr + ".JPG")
             cv2.imwrite(path, processor.get_transformation(tr))
-        print(f"\r✅ Processed image: {ipath}    ")
+        print(f"\rProcessed image: {ipath}    ")
 
 
 def set_plot(axes, row, col, plot_data, title):
@@ -94,6 +94,8 @@ def process_image(image_path: str, transfos: list[str]):
     plt.get_current_fig_manager().full_screen_toggle()
     plt.tight_layout()
     plt.show()
+    plt.savefig("outputs/transformation.png", dpi=150, bbox_inches="tight")
+    plt.close()
 
 
 def create_parser():
