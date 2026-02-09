@@ -16,7 +16,7 @@ RUN python -m pip install --upgrade pip \
     && pip install "rembg[cpu]"
 
 # Silence onnxruntime
-ENV ORT_LOG_SEVERITY_LEVEL=3
+ENV TF_CPP_MIN_LOG_LEVEL=3
 
 # Install oh-my-zsh and set up as default shell
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended && \
