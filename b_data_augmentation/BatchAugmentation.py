@@ -10,6 +10,7 @@ import random
 import glob
 import rembg
 from PIL import Image
+from tqdm import tqdm
 
 from b_data_augmentation.Augmentation import augment_image
 from a_data_analysis.Distribution import compute_distribution
@@ -44,17 +45,14 @@ def remove_all_backgrounds(directory_path: str):
             if os.path.splitext(f)[1].lower().endswith('.jpg'):
                 images.append(os.path.join(root, f))
 
-    total = len(images)
-    print(f"Removing backgrounds from {total} images...")
+    session = rembg.new_session("u2netp")
 
-    for i, img_path in enumerate(images, 1):
+    for img_path in tqdm(images, desc="Removing backgrounds"):
         img = Image.open(img_path).convert('RGB')
-        img = rembg.remove(img, bgcolor=(255, 255, 255))
+        img.thumbnail((512, 512))
+        img = rembg.remove(img, session=session, bgcolor=(255, 255, 255))
         img = img.convert('RGB')
         img.save(img_path)
-        print(f'\r> {i}/{total} images', end='')
-
-    print("\nBackground removal done.")
 
 
 def augment_balance_directory(directory_path: str):
