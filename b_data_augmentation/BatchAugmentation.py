@@ -8,6 +8,8 @@ import os
 import sys
 import random
 import glob
+import rembg
+from PIL import Image
 
 from b_data_augmentation.Augmentation import augment_image
 from a_data_analysis.Distribution import compute_distribution
@@ -32,10 +34,36 @@ def get_image_files(directory_path: str):
     return image_files
 
 
+def remove_all_backgrounds(directory_path: str):
+    """
+    Remove backgrounds from all images in all subdirectories.
+    """
+    images = []
+    for root, _, files in os.walk(directory_path):
+        for f in files:
+            if os.path.splitext(f)[1].lower().endswith('.jpg'):
+                images.append(os.path.join(root, f))
+
+    total = len(images)
+    print(f"Removing backgrounds from {total} images...")
+
+    for i, img_path in enumerate(images, 1):
+        img = Image.open(img_path).convert('RGB')
+        img = rembg.remove(img, bgcolor=(255, 255, 255))
+        img = img.convert('RGB')
+        img.save(img_path)
+        print(f'\r> {i}/{total} images', end='')
+
+    print("\nBackground removal done.")
+
+
 def augment_balance_directory(directory_path: str):
     """
     Runs augmentations on the subdirectories to balance the dataset.
     """
+    # Remove backgrounds from all images first
+    remove_all_backgrounds(directory_path)
+
     # Compute the distribution of images in the directory
     # { "dir_name": count, ... }
     distribution = compute_distribution(directory_path)

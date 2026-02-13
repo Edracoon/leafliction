@@ -6,3 +6,5 @@ augmented_directory/
 db/
 model/
 __pycache__/
+test_images
+*.png

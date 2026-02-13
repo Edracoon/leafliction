@@ -7,9 +7,18 @@ import os
 import sys
 import cv2
 import numpy as np
+import rembg
 from PIL import Image, ImageEnhance, ImageFilter
 import matplotlib.pyplot as plt
 import random
+
+
+def remove_background(image: np.ndarray) -> np.ndarray:
+    """Remove background from an OpenCV image using rembg."""
+    pil_img = Image.fromarray(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+    pil_img = rembg.remove(pil_img, bgcolor=(255, 255, 255))
+    pil_img = pil_img.convert('RGB')
+    return cv2.cvtColor(np.array(pil_img), cv2.COLOR_RGB2BGR)
 
 
 def load_image(image_path: str):
@@ -234,6 +243,11 @@ def main():
     if not image_path.lower().endswith(valid_extensions):
         print("Error: Provide a valid image file (.jpg, .jpeg).")
         sys.exit(1)
+
+    # Remove background and save
+    original = load_image(image_path)
+    original = remove_background(original)
+    save_augmented_image(original, image_path)
 
     # Apply data augmentation
     augment_image(image_path)
