@@ -49,7 +49,6 @@ def remove_all_backgrounds(directory_path: str):
 
     for img_path in tqdm(images, desc="Removing backgrounds"):
         img = Image.open(img_path).convert('RGB')
-        img.thumbnail((512, 512))
         img = rembg.remove(img, session=session, bgcolor=(255, 255, 255))
         img = img.convert('RGB')
         img.save(img_path)
