@@ -9,7 +9,7 @@ import random
 import shutil
 from dataclasses import dataclass
 from typing import Tuple
-from keras import models, layers, utils
+from keras import models, layers, utils, callbacks
 
 
 @dataclass
@@ -17,8 +17,8 @@ class Config:
     data_dir: str = "./augmented_directory"  # Path to the dataset
     out_dir: str = "./model"  # Path to the output directory
     batch_size: int = 32  # Number of images to process in each batch
-    img_shape: Tuple[int, int, int] = (128, 128, 3)  # Height, width, and rgb
-    epochs: int = 5  # Number of times to iterate over the entire dataset
+    img_shape: Tuple[int, int, int] = (256, 256, 3)  # Height, width, and rgb
+    epochs: int = 20  # Number of times to iterate over the entire dataset
     split_validation: float = 0.15  # Use 15% of the data for validation
     split_test: float = 0.15  # Use 15% of the data for testing
     seed: int = 42  # Random seed for reproducibility
@@ -85,10 +85,17 @@ def train_and_export():
 
     model = create_sequential_model()
 
+    early_stop = callbacks.EarlyStopping(
+        monitor="val_loss",
+        patience=3,
+        restore_best_weights=True,
+    )
+
     model.fit(
         train_data,
         validation_data=val_data,
         epochs=Config.epochs,  # Number of times to iterate
+        callbacks=[early_stop],
         verbose=1,
     )
     model.summary()  # Print the model summary

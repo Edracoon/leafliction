@@ -15,7 +15,7 @@ def evaluate():
 
     tests = utils.image_dataset_from_directory(
         TEST_DATASET_PATH,
-        image_size=(128, 128),
+        image_size=(256, 256),
         batch_size=32,
         label_mode='categorical',
         shuffle=False

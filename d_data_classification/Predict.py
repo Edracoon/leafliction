@@ -29,7 +29,7 @@ LABELS_PATH = 'model/labels.json'
 
 
 def preprocess_image(image_path: str):
-    img = image.load_img(image_path, target_size=(128, 128))
+    img = image.load_img(image_path, target_size=(256, 256))
 
     original_img = img.copy()
 
